@@ -1,0 +1,18 @@
+package fatima.mastour.venteService.feign;
+
+import fatima.mastour.venteService.model.Article;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@FeignClient(name = "ARTICLE-SERVICE")
+public interface VenteDetailRestClient {
+    @GetMapping(path = "/articles")
+    PagedModel <Article> pageArticles();
+
+    @GetMapping(path="/articles/{id}")
+    Article getArticleById(@PathVariable Long id);
+
+}
+
