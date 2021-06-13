@@ -37,12 +37,12 @@ public class VenteServiceApplication {
             Test test = testRestClient.getTestById(1L);
             Vente vent1 = venteRepository.save(new Vente(null, 123.0, new Date(),  1,null, test.getId(), null));
             PagedModel< Article > articlePagedModel=venteDetailRestClient.pageArticles();
-           articlePagedModel.forEach(p->{
+            articlePagedModel.forEach(p->{
                 VenteDetail venteDetail = new VenteDetail();
                 venteDetail.setPrice(p.getPrice());
                 venteDetail.setQuantity(1+new Random().nextInt(100));
                 venteDetail.setVente(vent1);
-                venteDetail.setArticleID(p.getId());
+                venteDetail.setArticleID((long) p.getId());
                 venteDetailRepository.save(venteDetail);
            });
         };
