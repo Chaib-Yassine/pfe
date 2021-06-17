@@ -21,10 +21,9 @@ public class TicketServiceApplication {
     CommandLineRunner start(TicketRepository ticketRepository, RepositoryRestConfiguration restConfiguration){
         restConfiguration.exposeIdsFor(Ticket.class);
         return args ->{
-             ticketRepository.save(new Ticket(null, 1, "012", true, 12,null));
-             ticketRepository.save(new Ticket(null, 1234, "0123", true,13,null));
-             ticketRepository.save(new Ticket(null, 12345,"01234", true,14,null ));
-             ticketRepository.save(new Ticket(null, 123456,"012345", false,15,null));
+
+             ticketRepository.save(new Ticket(null, 12345,"TK01234", true,14,null ));
+             ticketRepository.save(new Ticket(null, 123456,"TK012345", false,15,null));
              ticketRepository.findAll().forEach(c -> {
                 System.out.println(c.toString());
              });
