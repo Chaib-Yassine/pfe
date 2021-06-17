@@ -1,8 +1,10 @@
 package com.example.pointage.Repository;
 
 
-import com.example.pointage.Feign.VerifierService;
 
+import com.example.pointage.Feign.VerifierBadgeService;
+import com.example.pointage.Feign.VerifierInvitationService;
+import com.example.pointage.Feign.VerifierTicketService;
 import com.example.pointage.model.Verifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.pointage.entites.Pointage;
@@ -18,39 +20,58 @@ public class PointageRestController {
     @Autowired
     private PointageRepository pointageRepository;
     @Autowired
-    private  VerifierService verifierService;
-
+    private VerifierBadgeService verifierBadgeService;
+    @Autowired
+    private VerifierInvitationService verifierInvitationService;
+    @Autowired
+    private VerifierTicketService verifierTicketService;
     /*@Autowired
     private TypeBadgeServices typeBadgeServices;*/
 
 
-   @RequestMapping(value="/pointages",method = RequestMethod.POST)
+   @RequestMapping(value="/check",method = RequestMethod.POST)
    public Verifier savePointageDefault(@RequestBody Pointage pointage){
        String lettreNum="";
-       System.out.println(pointage.getCodeBarre());
-       System.out.println(pointage.getTourniquet());
-       switch (pointage.getCodeBarre().toLowerCase().substring(0,2)){
+
+        Boolean status =null    ;
+       switch (pointage.getCodeBarre().toUpperCase().substring(0,2)){
            case "BD":lettreNum="Badge";
+               if(verifierBadgeService.badgeVerification(pointage.getCodeBarre()).getEtat()==true){
+                   pointage.setAutorization(true);
+                   status=true;
+               }else{
+                   pointage.setAutorization(false);
+                   status=false;
+               }
                break;
            case "TK":lettreNum="Ticket";
+               if(verifierTicketService.ticketVerification(pointage.getCodeBarre()).getEtat()==true){
+                   pointage.setAutorization(true);
+                   status=true;
+               }else{
+                   pointage.setAutorization(false);
+                   status=false;
+               }
                break;
            case "IN":lettreNum="Invitation";
+               if(verifierInvitationService.invitationVerification(pointage.getCodeBarre()).getEtat()==true){
+                   pointage.setAutorization(true);
+                   status=true;
+               }else{
+                   pointage.setAutorization(false);
+                   status=false;
+               }
                break;
            default:
                lettreNum = "-";
                break;
        }
        pointage.setTypeTitreAcces(lettreNum);
+       System.out.println(lettreNum);
        pointage.setDate(new Date());
-
-      if(verifierService.etatVerification(pointage.getCodeBarre()).getEtat()==true){
-          pointage.setAutorization(true);
-      }else{
-          pointage.setAutorization(false);
-      }
        pointageRepository.save(pointage);
        Verifier verifier = new Verifier();
-       verifier.setEtat( verifierService.etatVerification(pointage.getCodeBarre()).getEtat());
+       verifier.setEtat( status);
 
        return verifier;
    }
