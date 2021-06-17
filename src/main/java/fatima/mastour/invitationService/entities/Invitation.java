@@ -20,7 +20,7 @@ public class Invitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int code_barres;
+    private String codeBare;
     private String type;
-    private boolean etat;
+    private Boolean etat;
 }

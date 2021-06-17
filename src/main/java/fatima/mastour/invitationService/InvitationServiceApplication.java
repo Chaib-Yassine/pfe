@@ -17,10 +17,9 @@ public class InvitationServiceApplication {
     @Bean
     CommandLineRunner start(InvitationRepository invitationRepository){
         return args -> {
-            invitationRepository.save(new Invitation (null, 123, "Organisateur",true));
-            invitationRepository.save(new Invitation(null, 1234, "Exposant",true));
-            invitationRepository.save(new Invitation(null, 12345, "Press",false));
-            invitationRepository.save(new Invitation(null, 123456, "Press",false));
+
+            invitationRepository.save(new Invitation(null, "IN14322345", "Press",false));
+            invitationRepository.save(new Invitation(null, "IN2R123456", "Press",true));
             invitationRepository.findAll().forEach(c -> {
                 System.out.println(c.toString());
             });

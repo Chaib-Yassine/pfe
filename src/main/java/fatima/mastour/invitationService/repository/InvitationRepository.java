@@ -6,6 +6,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface InvitationRepository  extends JpaRepository < Invitation, Long> {
+    Invitation  findByCodeBare(String codeBare);
 }
 
 
