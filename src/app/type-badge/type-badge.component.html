@@ -1,0 +1,131 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">List des chartes </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table" *ngIf="typeBadge">
+                        <thead class=" text-primary">
+                        <th>
+                          Id
+                        </th>
+                        <th>
+                          Titre
+                        </th>
+                        <th>
+                          Charte
+                        </th>
+                        <th >
+                          Etat
+                        </th>
+                        <th class="text-right">
+                          Action
+                        </th>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let p of typeBadge._embedded.typeBadges">
+                          <td>
+                            {{p.id}}
+                          </td>
+                          <td>
+                            {{p.titre}}
+                          </td>
+                          <td>
+                            {{p.chart}}
+                          </td>
+                          <td >
+                            {{p.statut}}
+                          </td>
+                          <td class="text-right">
+                            <div class="datatable-body-cell-label" style="margin-left: 0px;">
+
+                              <a _ngcontent-c10="" class="btn btn-round btn-warning btn-icon btn-sm edit " href="#">
+                                <i _ngcontent-c10="" class="far fa-edit"></i>
+                              </a>
+                              <a _ngcontent-c10="" class="btn btn-round btn-danger btn-icon btn-sm remove ml-2" href="#">
+                                <i _ngcontent-c10="" class="fas fa-times"></i>
+                              </a></div>
+                          </td>
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../assets/img/bg5.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Titre</label>
+                  <input type="text" class="form-control"  placeholder="Titre" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Charte</label>
+                  <app-file-input _ngcontent-c13="" _nghost-c17="">
+                    <div _ngcontent-c17="" class="form-group form-file-upload form-file-simple">
+                      <input _ngcontent-c17="" class="form-control inputFileVisible ng-star-inserted" placeholder="Selectionner images..." type="text">
+                      <input _ngcontent-c17="" class="inputFile"  type="file">
+                    </div>
+                  </app-file-input>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div _ngcontent-c9="" class="form-check">
+                    <label _ngcontent-c9="" class="form-check-label">
+                      <input _ngcontent-c9="" class="form-check-input" type="checkbox">
+                      <span _ngcontent-c9="" class="form-check-sign">
+                      </span> Etat
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                  <button class="btn btn-info btn-block">Enregistre</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+</div>

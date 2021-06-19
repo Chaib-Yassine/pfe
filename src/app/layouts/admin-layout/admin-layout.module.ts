@@ -14,6 +14,8 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import {TestComponent} from '../../test/test.component';
+import {TypeBadgeComponent} from '../../type-badge/type-badge.component';
 
 @NgModule({
   imports: [
@@ -33,6 +35,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    TestComponent,
+    TypeBadgeComponent
   ]
 })
 

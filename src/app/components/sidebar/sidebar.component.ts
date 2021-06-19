@@ -15,8 +15,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-profile', title: 'User Profile',  icon:'users_single-02', class: '' },
     { path: '/table-list', title: 'Table List',  icon:'design_bullet-list-67', class: '' },
     { path: '/typography', title: 'Typography',  icon:'text_caps-small', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'objects_spaceship', class: 'active active-pro' }
-
+    { path: '/test', title: 'Test',  icon:'text_caps-small', class: '' },
+    { path: '/type-badge', title: 'Type de badges',  icon:'text_caps-small', class: '' },
 ];
 
 @Component({
@@ -37,5 +37,5 @@ export class SidebarComponent implements OnInit {
           return false;
       }
       return true;
-  };
+  }
 }
