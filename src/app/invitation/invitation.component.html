@@ -1,0 +1,77 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">List des invitations imprimer </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <form #f="ngForm" (ngSubmit)="onCherche(f.value)">
+                        <div class="form-group">
+                          <label>Recherche Titre</label>
+                          <input type="text" class="form-control" name="keyword"  placeholder="Titre" ngModel>
+                          <button type="submit" class="btn btn-primary">Chercher</button>
+
+                        </div>
+
+                      </form>
+                      <table class="table" *ngIf="invitation">
+                        <thead class=" text-primary">
+                        <th>
+                          Code Barre
+                        </th>
+                        <th>
+                          Type de invitation
+                        </th>
+                        <th>
+                          etat
+                        </th>
+
+
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let p of invitation._embedded.invitations">
+                          <td>
+                            {{p.codeBare}}
+                          </td>
+
+                          <td>
+                            {{p.type}}
+                          </td>
+                          <td >
+                            {{p.etat}}
+                          </td>
+
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                      <ul *ngIf="pages" class="nav nav-pills ">
+                        <li class="clicable" [ngClass]="i==currentPage? 'active':''" *ngFor="let p of pages;let i=index" (click)="onPageProduct(i)">
+                          <a >{{i}}</a>
+
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

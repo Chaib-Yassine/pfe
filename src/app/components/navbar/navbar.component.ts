@@ -3,6 +3,8 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import Chart from 'chart.js';
+import {KeycloakService} from 'keycloak-angular';
+import {Globals} from '../../utility/globals';
 
 @Component({
   selector: 'app-navbar',
@@ -15,10 +17,10 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-
+    public user = '';
     public isCollapsed = true;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private keycloakService: KeycloakService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -35,12 +37,18 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+
+      this.user = this.keycloakService.getUsername() ;
+      Globals.userGlobal=this.keycloakService.getUsername();
+      //console.log(this.keycloakService.getUserRoles());
+      Globals.userRole=this.keycloakService.getUserRoles();
+
     }
 
     collapse(){
       this.isCollapsed = !this.isCollapsed;
       const navbar = document.getElementsByTagName('nav')[0];
-      console.log(navbar);
+      //console.log(navbar);
       if (!this.isCollapsed) {
         navbar.classList.remove('navbar-transparent');
         navbar.classList.add('bg-white');
@@ -152,4 +160,12 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+
+  logout() {
+    this.keycloakService.logout();
+  }
+
+  onChangePassword() {
+    this.keycloakService.getKeycloakInstance().accountManagement();
+  }
 }

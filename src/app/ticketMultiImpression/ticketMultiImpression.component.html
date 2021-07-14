@@ -1,0 +1,153 @@
+
+<style>
+  .printbadge{
+    width:21cm;
+    height:8cm;
+    font-family:Calibri;
+    margin:3px;
+    display:inline-block;
+    position:relative;
+    font-size:12px;
+  }
+
+  .prin{
+    width:100%;
+    width:21cm;
+    height:8cm;
+  }
+  .prin2{
+    width:100%;
+    height: 43px; width: 290px;
+  }
+  span{
+    color:black;
+    font-size:16px;
+  }
+
+  .info{
+    text-align: left;
+    line-height: 20px;
+    width: 100%;
+    position: absolute;
+    top: -185px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    transform: rotate(
+      270deg
+    );
+    left: -260px;
+    z-index: 99;
+  }
+  .info2{
+    text-align: left;
+    line-height: 20px;
+    width: 100%;
+    position: absolute;
+    top: -256px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    transform: rotate(
+      270deg
+    );
+    left: 338px;
+    z-index: 99;
+    color: white;
+  }
+  .info3{
+    text-align: left;
+    line-height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 196px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    left: 638px;
+    z-index: 99;
+  }
+  .lecode{
+    position: absolute;
+    top: 204px;
+    display: block;
+    left: 410px;
+    height: 30px;
+    padding: 3px;
+    width: auto !important;
+  }
+  .lecode2{
+    position:absolute;
+    top:150px;
+    display:block;
+    left:0px;
+    height:30px;
+    padding:3px;
+    /*background-color:#FFF;*/
+    width:auto !important;
+    transform: rotate(90deg);
+  }
+  .imgpr{
+    border-radius: 8px;
+    border: 1px solid;
+    margin: 4px 0px 7px 0px;
+    height: 153.828px;
+    width: 148.5px;
+    margin-top: 47px;
+  }
+  .p{
+    margin-top: 1Opx;
+    font-family: serif;
+    font-size: 15px;
+    line-height: 17px;
+  }
+  h3{
+    font-size: 2.2em;
+    margin: 15px 0;
+  }
+
+</style>
+<table >
+  <tr *ngFor="let b of badge.content" >
+
+    <td>
+      <div style="width:21cm;" >
+
+        <div class="printbadge" >
+
+          <img class="prin" src="./assets/badge/ticket.jpg" border="1" />
+
+          <div class="info mt-4" >
+
+
+            <h8 style="margin-bottom:12px" class="mt-5"> N° vente: {{b["nvente"]}}  ||  Date: {{("0" + (this.date.getDate() )).slice(-2)+"/"+("0" + (this.date.getMonth() + 1)).slice(-2)+"/"+this.date.getFullYear()}} </h8>
+
+          </div>
+          <div class="info2 mt-4" >
+
+
+            <h1 style="margin-bottom:12px" class="mt-5">  {{b["article"].designation}}  </h1>
+
+          </div>
+          <div class="info3 mt-4" >
+
+
+            <h3 style="margin-bottom:12px" class="mt-5">  {{b["article"].price}}  </h3>
+
+          </div>
+          <div class="lecode">
+            <qrcode [qrdata]='b["codeBarre"]' [width]="100" [errorCorrectionLevel]="'M'" ></qrcode>
+          </div>
+          <div class="lecode2">
+
+            <ngx-barcode [bc-value]='b["codeBarre"]'  [bc-display-value]="false" [bc-height]="60"></ngx-barcode>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </td>
+  </tr>
+</table>

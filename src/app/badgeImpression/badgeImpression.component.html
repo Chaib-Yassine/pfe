@@ -1,0 +1,102 @@
+
+<style>
+  .printbadge{
+    width:9cm;
+    height:13cm;
+    font-family:Calibri;
+    margin:3px;
+    display:inline-block;
+    position:relative;
+    font-size:12px;
+  }
+
+  .prin{
+    width:100%;
+    width:9cm;
+    height:13cm;
+  }
+  .prin2{
+    width:100%;
+    height: 43px; width: 290px;
+  }
+  span{
+    color:black;
+    font-size:16px;
+  }
+
+  .info{
+    text-align:center;
+    line-height:20px;
+    width:100%;
+    position:absolute;
+    top:60px;
+    font-weight:bold;
+    font-size:14px;
+    color:#333;
+  }
+
+  .lecode{
+    position:absolute;
+    top:220px;
+    display:block;
+    left:100px;
+    height:30px;
+    padding:3px;
+    /*background-color:#FFF;*/
+    width:auto !important;
+  }
+  .lecode2{
+    position:absolute;
+    top:345px;
+    display:block;
+    left:60px;
+    height:30px;
+    padding:3px;
+    /*background-color:#FFF;*/
+    width:auto !important;
+  }
+  .imgpr{
+    border-radius: 8px;
+    border: 1px solid;
+    margin: 4px 0px 7px 0px;
+    height: 153.828px;
+    width: 148.5px;
+    margin-top: 47px;
+  }
+  .p{
+    margin-top: 1Opx;
+    font-family: serif;
+    font-size: 15px;
+    line-height: 17px;
+  }
+  h3{
+    font-size: 2.2em;
+    margin: 15px 0;
+  }
+
+</style>
+<div style="width:21cm;" >
+
+  <div class="printbadge" >
+
+    <img class="prin" src="./assets/badge/{{badge['typeBadge'].chart}}" border="1" />
+
+    <div class="info mt-4" >
+
+
+      <h2 style="margin-bottom:12px" class="mt-5">  {{badge["prenom"]}}  {{badge["nom"]}} </h2>
+      <h4  > {{badge["organisme"]}}</h4>
+    </div>
+    <div class="lecode">
+    <!--  {{badge["codebare"]}}-->
+      <qrcode [qrdata]="myAngularxQrCode" [width]="136" [errorCorrectionLevel]="'M'" ></qrcode>
+    </div>
+    <div class="lecode2">
+      <!--  {{badge["codebare"]}}-->
+      <ngx-barcode [bc-value]="codeBare" [bc-display-value]="false" [bc-height]="40"></ngx-barcode>
+    </div>
+
+   </div>
+
+ </div>
+

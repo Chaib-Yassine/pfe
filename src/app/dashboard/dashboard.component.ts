@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import {Globals} from '../utility/globals';
+import {ROUTES} from '../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -60,6 +62,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");

@@ -1,0 +1,17 @@
+.clicable{
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius:5px ;
+  margin-right: 5px;
+}
+.active{
+  background-color:#FF3636 ;
+}
+.clicable:hover{
+  background-color: #bfbfbf;
+}
+.inp{
+  text-align: center;
+  border: none;
+}

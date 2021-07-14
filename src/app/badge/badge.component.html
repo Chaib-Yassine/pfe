@@ -1,0 +1,310 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">List des badges </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <form #f="ngForm" (ngSubmit)="onCherche(f.value)">
+                        <div class="row">
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Nom</label>
+                              <input type="text" class="form-control" name="nom"  placeholder="Nom" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Prènom</label>
+                              <input type="text" class="form-control" name="prenom"  placeholder="Prènom" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>CIN</label>
+                              <input type="text" class="form-control" name="cin"  placeholder="CIN" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Organisme</label>
+                              <input type="text" class="form-control" name="organisme"  placeholder="Organisme" ngModel>
+                            </div>
+                          </div>
+                        </div>
+                          <div class="row">
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Groupe</label>
+                              <input type="text" class="form-control" name="groupe"  placeholder="Groupe" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Code barre</label>
+                              <input type="text" class="form-control" name="codebarre"  placeholder="Code Barre" ngModel>
+                            </div></div>
+                          <div class="col-sm-3" >
+                            <div class="form-group">
+                              <label>Type Badge</label>
+                              <select *ngIf="typeBadge" class="form-control" name="typeBadge" ngModel>
+                                <option value="">Selection une option</option>
+                                <option *ngFor="let typB of typeBadge._embedded.typeBadges"  value="{{typB.id}}">{{typB.titre}}</option>
+                              </select>
+                            </div></div>
+                          <div class="col-sm-3" >
+                            <div class="form-group mt-3 ml-3">
+                              <button type="submit" class="btn btn-primary ">Chercher</button>
+                            </div></div>
+                        </div>
+                      </form>
+                      <table class="table" *ngIf="badge">
+                        <thead class=" text-primary">
+
+                        <th>
+                          Nom
+                        </th>
+                        <th>
+                          Prènom
+                        </th>
+                        <th >
+                          CIN
+                        </th>
+                        <th>
+                          Organisme
+                        </th>
+                        <th>
+                          Groupe
+                        </th>
+                        <th>
+                          Code barre
+                        </th>
+                        <th >
+                          Type Badge
+                        </th>
+                        <th >
+                          Date d'ajoute
+                        </th>
+                        <th >
+                          Etat
+                        </th>
+                        <th >
+                          Saisie par
+                        </th>
+                        <th >
+                          Impression
+                        </th>
+                        <th class="text-right">
+                          Action
+                        </th>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let b of badge.content">
+
+                          <td>
+                            {{b['nom']}}
+                          </td>
+                          <td>
+                            {{b['prenom']}}
+                          </td>
+                          <td >
+                            {{b['cin']}}
+                          </td>
+                          <td>
+                            {{b['organisme']}}
+                          </td>
+                          <td>
+                            {{b['groupe']}}
+                          </td>
+                          <td>
+                            {{b['codebare']}}
+                          </td>
+                          <td >
+                            {{b['typeBadge'].titre}}
+                          </td>
+                          <td>
+                            {{b['date']|date:"d/MM/YYYY"}}
+                          </td>
+                          <td>
+                            {{b['etat']}}
+                          </td>
+                          <td>
+                            {{b['id_user']}}
+                          </td>
+                          <td>
+                            <ul style="list-style: none;padding: 0">
+                              <li *ngFor="let bIm of b['badge_impression']">
+                                -user : {{bIm.idUser}} <br> date :{{bIm.date|date:"d/MM/YYYY"}}
+                              </li>
+                            </ul>
+
+                          </td>
+                          <td class="text-right">
+                            <div class="datatable-body-cell-label" style="margin-left: 0px;">
+                              <a _ngcontent-c10="" class="btn btn-round btn-success btn-icon btn-sm print " (click)="onImpression(b)">
+                                <i _ngcontent-c10="" class="far fa-id-badge"></i>
+                              </a>
+                              <a _ngcontent-c10="" class="btn btn-round btn-warning btn-icon btn-sm edit ml-2" >
+                                <i _ngcontent-c10="" class="far fa-edit"></i>
+                              </a>
+                              <a _ngcontent-c10="" class="btn btn-round btn-danger btn-icon btn-sm remove ml-2"  (click)="onDeleteProduct(b)">
+                                <i _ngcontent-c10="" class="fas fa-times"></i>
+                              </a></div>
+                          </td>
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                      <ul *ngIf="pages" class="nav nav-pills ">
+                        <li class="clicable" [ngClass]="i==currentPage? 'active':''" *ngFor="let p of pages;let i=index" (click)="onPageProduct(i)">
+                          <a >{{i}}</a>
+
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../assets/img/bg5.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <form #t="ngForm" (ngSubmit)="multiPrint(t.value)">
+                  <label>Type badge</label>
+                  <select *ngIf="groupeAll" class="form-control" name="groupe" ngModel>
+                    <option *ngFor="let typB of groupeAll"  value="{{typB}}">{{typB}}</option>
+                  </select>
+                  <button class="btn btn-info btn-block" type="submit">Imprimer</button>
+                </form>
+              </div>
+            </div>
+
+        </div>
+
+        <hr>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <form #t="ngForm" (ngSubmit)="upladFile()" >
+                    <label>Importer depuit Excel</label>
+                    <app-file-input _ngcontent-c13="" _nghost-c17="">
+                      <div _ngcontent-c17="" class="form-group form-file-upload form-file-simple">
+                        <input _ngcontent-c17="" class="form-control inputFileVisible ng-star-inserted" [value]="nbrElement" placeholder="Selectionner File..." type="text">
+                        <input _ngcontent-c17="" class="inputFile"  type="file" (change)="onFileChange($event)" multiple="false">
+                      </div>
+                    </app-file-input>
+                    <button class="btn btn-info btn-block" type="submit">Enregistrer depuis excel</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+            <hr>
+        <div class="card-body">
+          <form #e="ngForm" (ngSubmit)="onSaveProduct(e.value)">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control"  placeholder="Nom" name="nom" ngModel>
+                  <input type="hidden"  value="{{userZ}}"  name="id_user" ngModel>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Prènom</label>
+                  <input type="text" class="form-control"  placeholder="Prènom" name="prenom" ngModel>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>CIN</label>
+                  <input type="text" class="form-control"  placeholder="CIN" name="cin" ngModel>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Organisme</label>
+                  <input type="text" class="form-control"  placeholder="Organisme" name="organisme" ngModel>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Groupe</label>
+                  <input type="text" class="form-control"  placeholder="Groupe" name="groupe" ngModel>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Type badge</label>
+                  <select *ngIf="typeBadge" class="form-control" name="typebadgeid" ngModel >
+                    <option *ngFor="let typB of typeBadge._embedded.typeBadges"  value="{{typB.id}}">{{typB.titre}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div _ngcontent-c9="" class="form-check">
+                    <label _ngcontent-c9="" class="form-check-label">
+                      <input _ngcontent-c9="" class="form-check-input" type="checkbox" name="etat" ngModel>
+                      <span _ngcontent-c9="" class="form-check-sign">
+                      </span> Etat
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                  <button class="btn btn-info btn-block" type="submit">Enregistre</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">List des pointages </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <form #f="ngForm" (ngSubmit)="onCherche(f.value)">
+                      <div class="row">
+                            <div class="col-sm-3" >
+                              <div class="form-group">
+                                <label>Code barre</label>
+                                <input type="text" class="form-control" name="codeBarre"  placeholder="Code barre" ngModel>
+                              </div>
+                          </div>
+                        <div class="col-sm-3" >
+                          <div class="form-group">
+                            <label>Porte</label>
+                            <input type="text" class="form-control" name="porte"  placeholder="Porte" ngModel>
+                          </div>
+                        </div>
+                        <div class="col-sm-3" >
+                          <div class="form-group">
+                            <label>Tourniquet</label>
+                            <input type="text" class="form-control" name="tourniquet"  placeholder="Tourniquet" ngModel>
+                          </div>
+                        </div>
+                        <div class="col-sm-3" >
+                          <div class="form-group">
+                            <label>Type titre d'acces</label>
+                            <input type="text" class="form-control" name="typeBadge"  placeholder="Type Titre d'acces" ngModel>
+                          </div>
+                        </div>
+                        <div class="col-sm-2" style="display: none">
+                          <div class="form-group">
+                            <label>Autorisation</label>
+                            <input type="text" class="form-control" name="autorisation"  placeholder="Autorization" ngModel>
+                          </div>
+                        </div>
+                        </div>
+                      <div class="row">
+                        <div class="col-sm-5"style="visibility: hidden" >
+                        <div class="form-group">
+                          <label>Date Debut</label>
+                          <input type="date" class="form-control" name="startDate"  placeholder="startDate" ngModel>
+                        </div></div>
+                          <div class="col-sm-4" style="visibility: hidden">
+                        <div class="form-group">
+                          <label>Date Fin</label>
+                          <input type="date" class="form-control" name="endDate"  placeholder="endDate" ngModel>
+                        </div></div>
+                        <div class="col-sm-3" >
+                        <div class="form-group mt-3 ml-3">
+                           <button type="submit" class="btn btn-primary ">Chercher</button>
+                        </div></div>
+                      </div>
+                      </form>
+                    <div class="table-responsive" >
+
+                      <table class="table" *ngIf="pointage">
+                        <thead class=" text-primary">
+                        <th>
+                          Code Barre
+                        </th>
+                        <th>
+                          Porte
+                        </th>
+                        <th>
+                          Tourniquet
+                        </th>
+                        <th >
+                          Type Titre d'acces
+                        </th>
+                        <th>
+                          Autorisation
+                        </th>
+                        <th >
+                          Date
+                        </th>
+
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let p of pointage._embedded.pointages">
+                          <td>
+                            {{p.codebarre}}
+                          </td>
+                          <td>
+                            {{p.porte}}
+                          </td>
+                          <td>
+                            {{p.tourniquet}}
+                          </td>
+                          <td >
+                            {{p.typetitreacces}}
+                          </td>
+                          <td >
+                            {{p.autorization}}
+                          </td>
+                          <td >
+                            {{p.date|date:"d/MM/YYYY"}}
+                          </td>
+
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                      <ul *ngIf="pages" class="nav nav-pills ">
+                        <li class="clicable" [ngClass]="i==currentPage? 'active':''" *ngFor="let p of pages;let i=index" (click)="onPageProduct(i)">
+                          <a >{{i}}</a>
+
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

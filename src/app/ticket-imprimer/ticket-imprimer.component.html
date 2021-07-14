@@ -1,0 +1,88 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">List des tickets imprimer </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <form #f="ngForm" (ngSubmit)="onCherche(f.value)">
+                        <div class="form-group">
+                          <label>Recherche N° vente</label>
+                          <input type="text" class="form-control" name="keyword"  placeholder="N° vente" ngModel>
+                          <button type="submit" class="btn btn-primary">Chercher</button>
+
+                        </div>
+
+                      </form>
+                      <table class="table" *ngIf="ticketImprimer">
+                        <thead class=" text-primary">
+                        <th>
+                          Code Barre
+                        </th>
+                        <th>
+                          Designation
+                        </th>
+                        <th>
+                          N° de vente
+                        </th>
+                        <th >
+                          prix
+                        </th>
+                        <th >
+                          Etat
+                        </th>
+
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let p of ticketImprimer.content">
+                          <td>
+                            {{p["codeBarre"]}}
+                          </td>
+
+                          <td>
+                            {{p["article"].designation}}
+                          </td>
+                          <td >
+                            {{p["nvente"]}}
+                          </td>
+                          <td >
+                            {{p["article"].price}}
+                          </td>
+                          <td>
+                            {{p["etat"]}}
+                          </td>
+
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                      <ul *ngIf="pages" class="nav nav-pills ">
+                        <li class="clicable" [ngClass]="i==currentPage? 'active':''" *ngFor="let p of pages;let i=index" (click)="onPageProduct(i)">
+                          <a >{{i}}</a>
+
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

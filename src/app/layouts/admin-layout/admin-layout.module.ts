@@ -5,17 +5,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent } from '../../table-list/table-list.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import {TestComponent} from '../../test/test.component';
 import {TypeBadgeComponent} from '../../type-badge/type-badge.component';
+import {AfficheVenteComponent} from '../../affiche-vente/affiche-vente.component';
+import {BadgeComponent} from '../../badge/badge.component';
+import {InterfaceVenteComponent} from '../../interface-vente/interface-vente.component';
+import {PointageComponent} from '../../pointage/pointage.component';
+import {TicketImprimerComponent} from '../../ticket-imprimer/ticket-imprimer.component';
+import {TypeTicketComponent} from '../../type-ticket/type-ticket.component';
+import {InvitationComponent} from '../../invitation/invitation.component';
+import {BadgeImpressionComponent} from '../../badgeImpression/badgeImpression.component';
+import {QRCodeModule} from 'angularx-qrcode';
+import {NgxBarcodeModule} from 'ngx-barcode';
+import {BadgeMultiImpressionComponent} from '../../badgeMultiImpression/badgeMultiImpression.component';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {HttpClientModule} from '@angular/common/http';
+import {TicketMultiImpressionComponent} from '../../ticketMultiImpression/ticketMultiImpression.component';
 
 @NgModule({
   imports: [
@@ -24,19 +32,29 @@ import {TypeBadgeComponent} from '../../type-badge/type-badge.component';
     FormsModule,
     ChartsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    QRCodeModule,
+    NgxBarcodeModule,
+    KeycloakAngularModule,
+    HttpClientModule
+
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    TableListComponent,
-    UpgradeComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
     NotificationsComponent,
-    TestComponent,
-    TypeBadgeComponent
+    TypeBadgeComponent,
+    AfficheVenteComponent,
+    InterfaceVenteComponent,
+    PointageComponent,
+    BadgeComponent,
+    TicketImprimerComponent,
+    TypeTicketComponent,
+    InvitationComponent,
+    BadgeImpressionComponent,
+    BadgeMultiImpressionComponent,
+    TicketMultiImpressionComponent
+
   ]
 })
 
