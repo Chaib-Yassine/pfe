@@ -21,10 +21,11 @@ public class GbTypeBadgeApplication {
         restConfiguration.exposeIdsFor(TypeBadge.class);
         return args -> {
 
-            typeBadgeRepository.save(new TypeBadge(null,"vip","vip-chart",false));
-            typeBadgeRepository.save(new TypeBadge(null,"invite","invite-chart",false));
-            typeBadgeRepository.save(new TypeBadge(null,"press","press-chart",false));
-            typeBadgeRepository.save(new TypeBadge(null,"exposant","exposant-chart",false));
+            typeBadgeRepository.save(new TypeBadge(null,"Organisation","organisation.png",true));
+            typeBadgeRepository.save(new TypeBadge(null,"Service","service.png",true));
+            typeBadgeRepository.save(new TypeBadge(null,"Prestataire","prestataire.png",true));
+            typeBadgeRepository.save(new TypeBadge(null,"Service a","service a.png",true));
+            typeBadgeRepository.save(new TypeBadge(null,"service a-b","service.png",true));
             typeBadgeRepository.findAll().forEach(System.out::println);
         };
     }
