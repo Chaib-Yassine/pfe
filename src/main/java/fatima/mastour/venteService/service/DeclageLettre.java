@@ -72,7 +72,7 @@ public class DeclageLettre {
     }
 
     public String codeBarre(String nom,String prenom){
-        String code_barre="BD";
+        String code_barre="TK";
         Date date = new Date();   // given date
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
         calendar.setTime(date);   // assigns calendar to given date

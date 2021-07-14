@@ -18,6 +18,7 @@ public class VenteDetail {
     private double quantity;
     private double price;
     private Long articleID;
+    private Long venteIds;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Vente vente;

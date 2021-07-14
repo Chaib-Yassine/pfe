@@ -15,6 +15,6 @@ public interface AddTickerServices {
 
 
 	@PostMapping("/tickets/")
-	public Ticket addTicket(@PathVariable Long idArticle,@PathVariable String codeBarres,@PathVariable Boolean statut,@PathVariable Long nVente);
+	public Ticket addTicket(@PathVariable Long idArticle,@PathVariable String codeBarre,@PathVariable Boolean etat,@PathVariable Long nvente);
 
 }

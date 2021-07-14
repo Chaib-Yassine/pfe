@@ -9,9 +9,9 @@ public class Ticket {
 
     private Long id;
     private Long idArticle;
-    private String codeBarres;
-    private Boolean statut;
-    private Long  nVente;
+    private String codeBarre;
+    private Boolean etat;
+    private int  nVente;
 }
 
 
