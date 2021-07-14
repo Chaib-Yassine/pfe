@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class PointageRestController {
 
     @Autowired
@@ -29,14 +30,22 @@ public class PointageRestController {
     private TypeBadgeServices typeBadgeServices;*/
 
 
-   @RequestMapping(value="/check",method = RequestMethod.POST)
-   public Verifier savePointageDefault(@RequestBody Pointage pointage){
+   @RequestMapping(value="/check",method = RequestMethod.GET)
+   @CrossOrigin("*")
+   public Verifier savePointageDefault(@RequestParam(name = "code",defaultValue = "")String code,
+                                       @RequestParam(name = "trq",defaultValue = "")String trq,
+                                       @RequestParam(name = "port",defaultValue = "")String port){
+       Pointage pointage=new Pointage();
+       pointage.setCodebarre(code);
+       pointage.setTourniquet(trq);
+       pointage.setPorte(port);
+
        String lettreNum="";
 
         Boolean status =null    ;
-       switch (pointage.getCodeBarre().toUpperCase().substring(0,2)){
+       switch (pointage.getCodebarre().toUpperCase().substring(0,2)){
            case "BD":lettreNum="Badge";
-               if(verifierBadgeService.badgeVerification(pointage.getCodeBarre()).getEtat()==true){
+               if(verifierBadgeService.badgeVerification(pointage.getCodebarre()).getEtat()==true){
                    pointage.setAutorization(true);
                    status=true;
                }else{
@@ -45,7 +54,7 @@ public class PointageRestController {
                }
                break;
            case "TK":lettreNum="Ticket";
-               if(verifierTicketService.ticketVerification(pointage.getCodeBarre()).getEtat()==true){
+               if(verifierTicketService.ticketVerification(pointage.getCodebarre()).getEtat()==true){
                    pointage.setAutorization(true);
                    status=true;
                }else{
@@ -54,7 +63,7 @@ public class PointageRestController {
                }
                break;
            case "IN":lettreNum="Invitation";
-               if(verifierInvitationService.invitationVerification(pointage.getCodeBarre()).getEtat()==true){
+               if(verifierInvitationService.invitationVerification(pointage.getCodebarre()).getEtat()==true){
                    pointage.setAutorization(true);
                    status=true;
                }else{
@@ -66,7 +75,7 @@ public class PointageRestController {
                lettreNum = "-";
                break;
        }
-       pointage.setTypeTitreAcces(lettreNum);
+       pointage.setTypetitreacces(lettreNum);
        System.out.println(lettreNum);
        pointage.setDate(new Date());
        pointageRepository.save(pointage);

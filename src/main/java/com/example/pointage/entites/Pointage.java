@@ -16,10 +16,10 @@ import java.util.Date;
 public class Pointage {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String codeBarre;
+    private String codebarre;
     private String porte;
     private String tourniquet;
-    private Date Date;
-    private String typeTitreAcces;
+    private Date date;
+    private String typetitreacces;
     private Boolean autorization;
 }

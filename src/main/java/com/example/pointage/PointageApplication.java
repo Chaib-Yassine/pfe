@@ -24,10 +24,22 @@ public class PointageApplication {
         restConfiguration.exposeIdsFor(Pointage.class);
         return args -> {
 
-            pointageRepository.save(new Pointage(null,"AEODKDO","P2","T12",new Date(),"Badge",true));
-            pointageRepository.save(new Pointage(null,"21313&","P3","T11",new Date(),"Invitation",false));
-            pointageRepository.save(new Pointage(null,"42434325","P2","T1",new Date(),"Badge",true));
-            pointageRepository.save(new Pointage(null,"43432","P3","T1",new Date(),"Ticket",true));
+            pointageRepository.save(new Pointage(null,"BDAEODKDO","P2","T12",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"IN21313&","P3","T11",new Date(),"Invitation",false));
+            pointageRepository.save(new Pointage(null,"BD42434325","P2","T1",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"TK43432a","P3","T1",new Date(),"Ticket",true));
+            pointageRepository.save(new Pointage(null,"BDAEODKDaO","P2","T12",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"IN21313a&","P3","T11",new Date(),"Invitation",false));
+            pointageRepository.save(new Pointage(null,"BD42434a325","P2","T1",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"TK4a3432","P3","T1",new Date(),"Ticket",true));
+            pointageRepository.save(new Pointage(null,"BaDAEODKDO","P2","T12",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"IN213a13&","P3","T11",new Date(),"Invitation",false));
+            pointageRepository.save(new Pointage(null,"BD424a34325","P2","T1",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"TKa43432","P3","T1",new Date(),"Ticket",true));
+            pointageRepository.save(new Pointage(null,"BDAEaODKDO","P2","T12",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"IN21a313&","P3","T11",new Date(),"Invitation",false));
+            pointageRepository.save(new Pointage(null,"BaD42434325","P2","T1",new Date(),"Badge",true));
+            pointageRepository.save(new Pointage(null,"TKa43432","P3","T1",new Date(),"Ticket",true));
             pointageRepository.findAll().forEach(System.out::println);
         };
     }
