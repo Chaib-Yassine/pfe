@@ -14,6 +14,6 @@ public class Badge_impression {
    // @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
    private int idBadge;
-    private int idUser;
+    private String idUser;
     private Date date;
 }

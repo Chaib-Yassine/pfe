@@ -30,8 +30,8 @@ public class GbApplication {
             System.out.println(typeBadge.getTitre() );
             System.out.println(typeBadge.getChart() );
             System.out.println(typeBadge.getId() );
-            badgeRepository.save(new Badge(null,"yassine","chaib","AD12","organisme","bp1","B009218",typeBadge.getId(),null, new Date(),12,false,null));
-            badgeRepository.save(new Badge(null,"test","nom","AD31","organisme","bp1","B009210",typeBadge.getId(),null, new Date(),12,true,null));
+            badgeRepository.save(new Badge(null,"yassine","chaib","AD12","organisme","bp1","BD009218",typeBadge.getId(),null, new Date(),"User 1",false,null));
+            badgeRepository.save(new Badge(null,"test","nom","AD31","organisme1","bp2","BD009210",typeBadge.getId(),null, new Date(),"User 2",true,null));
             badgeRepository.findAll().forEach(System.out::println);
         };
     }

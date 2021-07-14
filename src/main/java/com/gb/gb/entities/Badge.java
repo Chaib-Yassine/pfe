@@ -23,13 +23,13 @@ public class Badge {
     private String cin;
   private String organisme;
     private String groupe;
-    private String codeBare;
+    private String codebare;
      @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-     private Long typeBadgeID;
+     private Long typebadgeid;
     @Transient
     private TypeBadge typeBadge;
     private Date date;
-    private int id_user;
+    private String id_user;
     private Boolean etat;
      @Transient
      private List<Badge_impression> Badge_impression;
