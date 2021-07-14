@@ -20,11 +20,11 @@ public class BadgeImpressionApplication {
     CommandLineRunner start(BadgeImpressionRepository badgeImpressionRepository, RepositoryRestConfiguration restConfiguration){
         restConfiguration.exposeIdsFor(BadgeImpression.class);
         return args -> {
-            badgeImpressionRepository.save(new BadgeImpression(null,1,1,new Date()));
-            badgeImpressionRepository.save(new BadgeImpression(null,1,1,new Date()));
-            badgeImpressionRepository.save(new BadgeImpression(null,1,1,new Date()));
-            badgeImpressionRepository.save(new BadgeImpression(null,2,1,new Date()));
-            badgeImpressionRepository.save(new BadgeImpression(null,2,1,new Date()));
+            badgeImpressionRepository.save(new BadgeImpression(null,1,"user1",new Date()));
+            badgeImpressionRepository.save(new BadgeImpression(null,1,"User1",new Date()));
+            badgeImpressionRepository.save(new BadgeImpression(null,1,"user2",new Date()));
+            badgeImpressionRepository.save(new BadgeImpression(null,2,"user3",new Date()));
+            badgeImpressionRepository.save(new BadgeImpression(null,2,"user2",new Date()));
             badgeImpressionRepository.findAll().forEach(System.out::println);
         };
     }

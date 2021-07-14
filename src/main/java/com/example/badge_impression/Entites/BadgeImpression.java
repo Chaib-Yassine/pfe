@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -17,6 +14,8 @@ public class BadgeImpression {
     @Id    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int idBadge;
-    private int idUser;
+    private String idUser;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date date;
 }
