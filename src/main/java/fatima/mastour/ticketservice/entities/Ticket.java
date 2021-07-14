@@ -18,10 +18,10 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int idArticle;
+    private Long idArticle;
     private String codeBarre;
     private Boolean etat;
-    private int  nVente;
+    private int  nvente;
     @Transient
     private Article article;
 }

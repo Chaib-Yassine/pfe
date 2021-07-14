@@ -1,6 +1,8 @@
 package fatima.mastour.ticketservice;
 
+import fatima.mastour.ticketservice.Model.Article;
 import fatima.mastour.ticketservice.entities.Ticket;
+import fatima.mastour.ticketservice.feign.ArticleRestClient;
 import fatima.mastour.ticketservice.repository.TicketRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,12 +20,12 @@ public class TicketServiceApplication {
        SpringApplication.run(TicketServiceApplication.class, args);
     }
     @Bean
-    CommandLineRunner start(TicketRepository ticketRepository, RepositoryRestConfiguration restConfiguration){
+    CommandLineRunner start(TicketRepository ticketRepository, ArticleRestClient articleRestClient, RepositoryRestConfiguration restConfiguration){
         restConfiguration.exposeIdsFor(Ticket.class);
         return args ->{
-
-             ticketRepository.save(new Ticket(null, 12345,"TK01234", true,14,null ));
-             ticketRepository.save(new Ticket(null, 123456,"TK012345", false,15,null));
+           // Article typeBadge=articleRestClient.findCustomerById(1L);
+             ticketRepository.save(new Ticket(null, (long) 1,"TK01234", true,14,null ));
+             ticketRepository.save(new Ticket(null, (long)2,"TK012345", false,15,null));
              ticketRepository.findAll().forEach(c -> {
                 System.out.println(c.toString());
              });
