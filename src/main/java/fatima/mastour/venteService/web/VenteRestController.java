@@ -38,6 +38,7 @@ public class VenteRestController {
     }
 
     //Enregistre Vente detaill
+    int j=1;
     @RequestMapping(value="/venteDetails",method = RequestMethod.POST)
     public VenteDetail saveVenteDetailsDefault(@RequestBody VenteDetail venteDetail){
        // System.out.println(venteDetail.getVenteIds());
@@ -46,14 +47,16 @@ public class VenteRestController {
         venteDetail.setVente(vente);
         //System.out.println(venteDetail.getQuantity());
         venteDetailRepository.save(venteDetail);
+        //System.out.println(venteDetail.getQuantity());
 
         for(int i=0 ;i<venteDetail.getQuantity();i++){
+            System.out.println(j);
             String code;
             DeclageLettre declageLettre =new DeclageLettre();
-            code= declageLettre.codeBarre("getNom()","badge.getPrenom()");
-
+            code= declageLettre.codeBarre("Nom","Prenom",(int)(Math.random()*100));
+            System.out.println(code);
             addTickerServices.addTicket(venteDetail.getArticleID(),code,true,vente.getId());
-
+       j++;
            // System.out.println(venteDetail.getArticleID()+" "+code+" "+true+" "+vente.getId());
 
         }
