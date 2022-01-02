@@ -54,6 +54,7 @@ public class PointageRestController {
                }
                break;
            case "TK":lettreNum="Ticket";
+               //System.out.println(verifierTicketService.ticketVerification(pointage.getCodebarre()).getEtat());
                if(verifierTicketService.ticketVerification(pointage.getCodebarre()).getEtat()==true){
                    pointage.setAutorization(true);
                    status=true;
