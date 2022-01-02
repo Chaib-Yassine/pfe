@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 public interface InvitationRepository  extends JpaRepository < Invitation, Long> {
     Invitation  findByCodeBare(String codeBare);
+    boolean existsByType(String type);
     @RestResource(path = "/byCodeBarre")
     public Page<Invitation> findInvitationByCodeBareContains(@Param("mc")String titre, Pageable pageable);
 
