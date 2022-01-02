@@ -33,9 +33,12 @@ export class BadgeService {
     return this.httpClient.delete(url);
   }
   public saveVente(url,data){
-
     console.log(data);
     return this.httpClient.post(this.host+"/BADGES-SERVICE/saveBadgesCb",data);
+  }
+  public updateBadges(url,data){
+    console.log(data);
+    return this.httpClient.post(this.host+"/BADGES-SERVICE/updateBadgesCb",data);
   }
 
   public getVenteDetail(article:number){
@@ -45,5 +48,13 @@ export class BadgeService {
 
     console.log("ici "+data);
     return this.httpClient.post(this.host+"/IMPRESSION-BADGE-SERVICE/badgeImpressions",data);
+  }
+  public checkExist(url,data){
+    console.log(data);
+    return this.httpClient.get(this.host+"/BADGES-SERVICE/badgeExist/"+data);
+  }
+  public badgeCode(url,data){
+    console.log(data);
+    return this.httpClient.get(this.host+"/BADGES-SERVICE/badgeCode/"+data);
   }
 }

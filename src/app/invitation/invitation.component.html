@@ -12,7 +12,31 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <form #f="ngForm" (ngSubmit)="onGenere(f.value);f.resetForm()">
+                        <div class="form-group">
+                          <label>Génerer des invitations</label>
+                          <div class="row">
+                            <div class="col">
+                               <input type="text" class="form-control" name="titre"  placeholder="Titre" ngModel>
+                            </div>
+                              <div class="col">
+                                 <input type="number" class="form-control" name="nbr"  placeholder="Nombre" ngModel>
+                              </div>
+                          </div>
+                             <button type="submit" class="btn btn-success">Générer</button>
 
+                        </div>
+
+                      </form>
+
+                    </div>
+                    <div class="row" id="loading" style="display: none">
+                      <img class="align-content-center" src="assets/img/loading-97.gif" style="margin: 0 auto;width: 10%" />
+
+                    </div>
+                  </div>
                   <div class="card-body">
                     <div class="table-responsive">
                       <form #f="ngForm" (ngSubmit)="onCherche(f.value)">
@@ -24,7 +48,8 @@
                         </div>
 
                       </form>
-                      <table class="table" *ngIf="invitation">
+                      <div> <button  class="btn btn-info" (click)="exportexcel()">Excel</button></div>
+                      <table class="table" *ngIf="invitation"  id="excel-table">
                         <thead class=" text-primary">
                         <th>
                           Code Barre

@@ -23,7 +23,9 @@ export class TypeTicketService {
     return this.httpClient.delete(url);
   }
   public saveTypeBadges(url,data){
-    let test:string;
+    return this.httpClient.post(this.host+"/ARTICLE-SERVICE/articles",data);
+  }
+  public updateTypeBadges(url,data){
     return this.httpClient.post(this.host+"/ARTICLE-SERVICE/articles",data);
   }
 }

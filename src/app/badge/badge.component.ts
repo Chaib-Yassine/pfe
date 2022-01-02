@@ -44,6 +44,8 @@ export class BadgeComponent implements OnInit {
   public datae:any;
   public excel :any ="";
   public nbrElement:any="Selectionner fichier...";
+  public etat :number=1;
+  public badgeE:any;
   constructor(private badgeService:BadgeService,private typeBadgeService:TypeBadgeService,private router:Router,private keycloakService: KeycloakService,private toastr: ToastrService) { }
 
 
@@ -143,20 +145,39 @@ export class BadgeComponent implements OnInit {
   }
 
   onSaveProduct(value: any) {
-
-    value.id_user=Globals.userGlobal;
-    this.badgeService.saveVente("",value)
+    this.badgeService.checkExist("",value.cin)
       .subscribe(resp=>{
-        this.onGetVente();
-        this.onGroupe();
-       this.showNotification("top", "center",2)
-       // console.log(resp)
+        console.log(resp);
+        if (resp==true){
+          this.showNotification("top", "center",5)
+          var r = confirm("Ce badge exist déja, voulez vous l'ajouter !!");
+          if (r == true) {
+            value.id_user=Globals.userGlobal;
+            this.badgeService.saveVente("",value)
+              .subscribe(resp=>{
+                this.onGetVente();
+                this.onGroupe();
+                this.showNotification("top", "center",2)
+                // console.log(resp)
+              },err => {
+                console.log(err);
+              })
+          }
+        }else {
+          value.id_user=Globals.userGlobal;
+          this.badgeService.saveVente("",value)
+            .subscribe(resp=>{
+              this.onGetVente();
+              this.onGroupe();
+              this.showNotification("top", "center",2)
+              // console.log(resp)
+            },err => {
+              console.log(err);
+            })
+        }
       },err => {
         console.log(err);
       })
-
-
-
   }
 
 
@@ -166,6 +187,15 @@ export class BadgeComponent implements OnInit {
                 '"idUser":"'+Globals.userGlobal+'",' +
                '"date":"'+this.date.getFullYear()+"-"+("0" + (this.date.getMonth() + 1)).slice(-2)+"-"+("0" + (this.date.getDate() + 1)).slice(-2)+'"}'
     this.datae=JSON.parse(this.datae);
+    if (value.badge_impression.length>0){
+      if(confirm("Voulez vous changer le Code barre")){
+        this.badgeService.badgeCode("",value.id)
+          .subscribe(resp=>{ },err => {
+            console.log(err);
+          })
+      }
+    }
+
    //
     this.badgeService.saveVenteImpression("",this.datae)
       .subscribe(resp=>{
@@ -213,19 +243,46 @@ export class BadgeComponent implements OnInit {
       for (let i = 1; i < this.excel.length; i++) {
         this.typeBadgeService.getTypeBadgesCherche1(0,10,this.excel[i][5])
           .subscribe(data=>{
-            this.typeBadgeAdd=data["_embedded"].typeBadges[0].id;
-            this.datae='{"nom":"'+this.excel[i][0]+'",' +
-              '"prenom":"'+this.excel[i][1]+'",' +'"cin":"'+this.excel[i][2]+'",' +
-              '"organisme":"'+this.excel[i][3]+'","groupe":"'+this.excel[i][4]+'","typebadgeid":"'+this.typeBadgeAdd+'","id_user":"'+Globals.userGlobal+'","etat":"true"}';
-            this.datae=JSON.parse(this.datae.toString());
-            this.badgeService.saveVente("",this.datae)
+
+
+            this.badgeService.checkExist("",this.excel[i][2])
               .subscribe(resp=>{
-                console.log(resp);
-                this.onGetVente();
-                this.onGroupe();
+                this.typeBadgeAdd=data["_embedded"].typeBadges[0].id;
+                this.datae='{"nom":"'+this.excel[i][0]+'",' +
+                  '"prenom":"'+this.excel[i][1]+'",' +'"cin":"'+this.excel[i][2]+'",' +
+                  '"organisme":"'+this.excel[i][3]+'","groupe":"'+this.excel[i][4]+'","typebadgeid":"'+this.typeBadgeAdd+'","id_user":"'+Globals.userGlobal+'","etat":"true"}';
+                this.datae=JSON.parse(this.datae.toString());
+                if (resp==true){
+                  this.showNotification("top", "center",5)
+                  var r = confirm("Ce badge exist déja, voulez vous l'ajouter !!");
+                  if (r == true) {
+                   // this.datae.id_user=Globals.userGlobal;
+                    this.badgeService.saveVente("",this.datae)
+                      .subscribe(resp=>{
+                        this.onGetVente();
+                        this.onGroupe();
+                        this.showNotification("top", "center",2)
+                        // console.log(resp)
+                      },err => {
+                        console.log(err);
+                      })
+                  }
+                }else {
+                 // this.datae.id_user=Globals.userGlobal;
+                  this.badgeService.saveVente("",this.datae)
+                    .subscribe(resp=>{
+                      this.onGetVente();
+                      this.onGroupe();
+                      this.showNotification("top", "center",2)
+                      // console.log(resp)
+                    },err => {
+                      console.log(err);
+                    })
+                }
               },err => {
                 console.log(err);
               })
+
           },err => {
             console.log(err)
           })
@@ -307,10 +364,38 @@ export class BadgeComponent implements OnInit {
           positionClass: 'toast-' + from + '-' +  align
         });
         break;
-
+      case 5:
+        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> Badge existe déja.', '', {
+          timeOut: 8000,
+          enableHtml: true,
+          closeButton: true,
+          toastClass: "alert alert-danger alert-with-icon",
+          positionClass: 'toast-' + from + '-' +  align
+        });
+        break;
       default:
         break;
     }
+  }
+
+  onUpdateProduct(value: any) {
+    value.id_user=Globals.userGlobal;
+    this.badgeService.updateBadges("",value)
+      .subscribe(resp=>{
+        this.showNotification('top', 'center',3);
+        //this.onGetTypeBadge();
+        this.ngOnInit();
+      },err => {
+        console.log(err);
+      })
+    //this.onGetTypeBadge();
+   // this.ngOnInit();
+    this.etat=1;
+  }
+
+  onEditProduct(p: any) {
+    this.badgeE=p;
+    this.etat=2;
   }
 }
 

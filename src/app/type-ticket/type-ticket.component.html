@@ -60,7 +60,7 @@
                           <td class="text-right">
                             <div class="datatable-body-cell-label" style="margin-left: 0px;">
 
-                              <a _ngcontent-c10="" class="btn btn-round btn-warning btn-icon btn-sm edit " >
+                              <a _ngcontent-c10="" class="btn btn-round btn-warning btn-icon btn-sm edit " (click)="onEditProduct(p)">
                                 <i _ngcontent-c10="" class="far fa-edit"></i>
                               </a>
                               <a _ngcontent-c10="" class="btn btn-round btn-danger btn-icon btn-sm remove ml-2"  (click)="onDeleteProduct(p)">
@@ -93,8 +93,9 @@
         <div class="image">
           <img src="../assets/img/bg5.jpg" alt="...">
         </div>
-        <div class="card-body">
-          <form #e="ngForm" (ngSubmit)="onSaveProduct(e.value)">
+        <div class="card-body" *ngIf="etat==1">
+          <h2>Save</h2>
+          <form #e="ngForm" (ngSubmit)="onSaveProduct(e.value); e.resetForm()">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
@@ -107,7 +108,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Prix</label>
-                  <input type="text" class="form-control"  placeholder="Prix" name="price" ngModel>
+                  <input type="number" class="form-control"  placeholder="Prix" name="price" ngModel>
                 </div>
               </div>
             </div>
@@ -131,6 +132,46 @@
         <hr>
 
       </div>
+        <div class="card-body" *ngIf="etat==2">
+          <h2>Update</h2>
+          <form #e="ngForm" (ngSubmit)="onUpdateProduct(e.value);e.resetForm()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Designation</label>
+                  <input type="text" class="form-control"  placeholder="Designation" name="designation" ngModel [(ngModel)]="typeTicketE.designation">
+                  <input type="hidden" name="id" ngModel [(ngModel)]="typeTicketE.id" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Prix</label>
+                  <input type="number" class="form-control"  placeholder="Prix" name="price" ngModel [(ngModel)]="typeTicketE.price">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Quantité</label>
+                  <input type="number" class="form-control"  placeholder="Quantité" name="quantity" ngModel [(ngModel)]="typeTicketE.quantity">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                  <button class="btn btn-warning btn-block" type="submit">Modifier</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <hr>
+
+        </div>
     </div>
   </div>
 </div>

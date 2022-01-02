@@ -20,4 +20,11 @@ export class InvitationService {
     return this.httpClient.get(this.host+"/INVITATION-SERVICE/invitations/search/byCodeBarre?mc="+mc+"&page="+page+"&size="+size);
   }
 
+  public genrerInvitation(titre: string, nbr: number) {
+    return this.httpClient.get(this.host+"/INVITATION-SERVICE/genereInvitation?nbr="+nbr+"&titre="+titre);
+  }
+  public checkInvitation(titre: string) {
+    return this.httpClient.get(this.host+"/INVITATION-SERVICE/invitationExist/"+titre);
+  }
+
 }

@@ -29,7 +29,12 @@ export class TypeBadgeService {
   }
   public saveTypeBadges(url,data){
 
-  //  console.log(data);
+   //console.log("back=> "+data);
+    return this.httpClient.post(this.host+"/TYPE-BADGE-SERVICE/typeBadges",data);
+  }
+
+  updatTypeBadges(url,data) {
+  //  console.log("back=> "+data)
     return this.httpClient.post(this.host+"/TYPE-BADGE-SERVICE/typeBadges",data);
   }
 }

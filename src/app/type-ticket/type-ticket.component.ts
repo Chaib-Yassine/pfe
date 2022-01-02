@@ -21,7 +21,8 @@ export class TypeTicketComponent implements OnInit {
   public totalPages:number;
   public pages:Array<number>;
   private currentKeyword: string="";
-
+  public etat :number=1;
+  public typeTicketE:any;
   constructor(private typeTicketService:TypeTicketService,private toastr: ToastrService,protected router: Router, protected keycloakAngular: KeycloakService) { }
 
   ngOnInit() {
@@ -97,6 +98,8 @@ export class TypeTicketComponent implements OnInit {
         console.log(err);
       })
     this.onGetTypeBadge();
+    this.etat=1;
+
   }
 
   showNotification(from, align,color){
@@ -134,6 +137,24 @@ export class TypeTicketComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  onUpdateProduct(value: any) {
+     console.log(value);
+    this.typeTicketService.updateTypeBadges("",value)
+      .subscribe(resp=>{
+        this.showNotification('top', 'center',3);
+        this.onGetTypeBadge();
+      },err => {
+        console.log(err);
+      })
+    this.onGetTypeBadge();
+    this.etat=1;
+  }
+
+  onEditProduct(p: any) {
+    this.typeTicketE=p;
+    this.etat=2;
   }
 }
 
