@@ -7,6 +7,7 @@ import com.gb.gb.entities.Badge;
 import com.gb.gb.entities.Verifier;
 import com.gb.gb.model.TypeBadge;
 import com.gb.gb.service.DeclageLettre;
+import com.sun.tools.jconsole.JConsolePlugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +29,7 @@ public class BadgeRestController {
     private ImpressionService impressionService;
     @Autowired
     private TypeBadgeServices typeBadgeServices;
-
+    private boolean exists;
 
     @GetMapping("/groupe")
     public List<String> getGroupe(){
@@ -72,7 +73,7 @@ public class BadgeRestController {
         });
         return badge;
     }
-
+    //save
     @RequestMapping(value="/saveBadgesCb",method = RequestMethod.POST)
     public Badge saveBadgeDefault( @RequestBody Badge badge){
         String code;
@@ -85,10 +86,42 @@ public class BadgeRestController {
         System.out.println(badge1.getId());
         code= declageLettre.codeBarre(badge.getNom(),badge.getPrenom(),badge1.getId());
         badge.setCodebare(code);
+        if (badge.getEtat()==null){
+            badge.setEtat(false);
+        }else{
+            badge.setEtat(true);
+        }
+        badge.setCin(badge.getCin().toUpperCase());
         badgeRepository.save(badge);
        // impressionService.addImpression(badge.getId(),badge.getId_user());
         return badge;
     }
+
+    // update
+    @RequestMapping(value="/updateBadgesCb",method = RequestMethod.POST)
+    public Badge updateBadgeDefault( @RequestBody Badge badge){
+        //System.out.println(badge);
+        badge.setDate(new Date());
+        Badge badgeUp=getBadge(badge.getId());
+        badgeUp.setNom(badge.getNom());
+        badgeUp.setPrenom(badge.getPrenom());
+        badgeUp.setOrganisme(badge.getOrganisme());
+        badgeUp.setGroupe(badge.getGroupe());
+        badgeUp.setCin(badge.getCin().toUpperCase());
+        if (badge.getEtat()==null){
+            badgeUp.setEtat(false);
+        }else{
+            badgeUp.setEtat(true);
+        }
+        TypeBadge typeBadge=typeBadgeServices.findCustomerById(badge.getTypebadgeid());
+        badgeUp.setTypebadgeid(typeBadge.getId());
+       // System.out.println("$$$$$$$$$$$");
+       // System.out.println(badgeUp);
+
+        badgeRepository.save(badgeUp);
+        return badge;
+    }
+
 
     //check badge statut
     @GetMapping("/badgeAutorisation/{codeBare}")
@@ -107,5 +140,34 @@ public class BadgeRestController {
         }
         return verifier;
     }
+
+    //check badge Exist
+    @GetMapping("/badgeExist/{cin}")
+    public boolean getBadgeExist(@PathVariable(name = "cin") String cin){
+        System.out.println(cin.toUpperCase());
+        try{
+            exists = badgeRepository.existsByCin(cin.toUpperCase());
+            System.out.println(exists);
+
+        }
+        catch (Exception e){
+            System.out.println("intouvable cin");
+        }
+        return exists;
+    }
+
+
+    @GetMapping("/badgeCode/{id}")
+    public boolean getChangeCode(@PathVariable(name = "id") Long id){
+        Badge badgeUp=getBadge(id);
+        System.out.println(badgeUp.getCodebare());
+        DeclageLettre declageLettre =new DeclageLettre();
+        badgeUp.setCodebare(declageLettre.codeBarre(badgeUp.getNom(),badgeUp.getPrenom(),badgeUp.getId()));
+        badgeRepository.save(badgeUp);
+        System.out.println(badgeUp.getCodebare());
+        return true;
+    }
+
+
 
 }

@@ -24,7 +24,7 @@ public class Badge {
   private String organisme;
     private String groupe;
     private String codebare;
-     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
      private Long typebadgeid;
     @Transient
     private TypeBadge typeBadge;
