@@ -19,7 +19,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idArticle;
-    private String codeBarre;
+    private String codebarre;
     private Boolean etat;
     private int  nvente;
     @Transient

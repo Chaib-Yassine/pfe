@@ -48,15 +48,16 @@ public class TicketRestController {
     public Verifier getTicketAutorisation(@PathVariable(name = "codeBare") String codeBare){
         Verifier verifier=new Verifier();
         try{
-            Ticket ticket= ticketRepository.findByCodeBarre(codeBare);
-            //System.out.println(ticket);
+            Ticket ticket= ticketRepository.findByCodebarre(codeBare);
+            System.out.println(ticket);
             if(ticket.getEtat()==true){
                 verifier.setEtat(true);
                 ticket.setEtat(false);
                 ticketRepository.save(ticket);
             }else{
                 verifier.setEtat(false);
-            }}
+            }
+        }
         catch (Exception e){
             verifier.setEtat(false);
         }
@@ -66,7 +67,7 @@ public class TicketRestController {
     @RequestMapping(value="/saveTicket/)",method = RequestMethod.POST)
     public Ticket saveTicket(@RequestBody Ticket ticket){
         System.out.println("test");
-        System.out.println(ticket.getCodeBarre());
+       // System.out.println(ticket.getCodeBarre());
 
 
         return ticket;
