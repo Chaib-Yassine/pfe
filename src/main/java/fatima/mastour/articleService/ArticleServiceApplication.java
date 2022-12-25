@@ -18,10 +18,13 @@ public class ArticleServiceApplication {
     CommandLineRunner start(ArticleRepository articleRepository, RepositoryRestConfiguration restConfiguration){
         restConfiguration.exposeIdsFor(Article.class);
         return args -> {
-
+/*
             articleRepository.save(new Article(null, "ticket1", 100,10));
             articleRepository.save(new Article(null, "ticket2", 200,20));
             articleRepository.save(new Article(null, "ticket3", 300,30));
+            for (int i =0;i<100;i++){
+                articleRepository.save(new Article(null, "ticket-"+i, 300+i,30));
+            }*/
         };
     }
 
